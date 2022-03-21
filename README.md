@@ -2,6 +2,8 @@
 
 subfinder 是一个通用字幕查找器，可以查找字幕并下载。
 
+此版本相较于原版增加--set_default参数，使之更加适配jellyfin和emby等服务器
+
 ---
 
 [![PyPi](https://img.shields.io/pypi/v/subfinder.svg)](https://pypi.org/project/subfinder/)

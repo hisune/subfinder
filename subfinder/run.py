@@ -59,6 +59,9 @@ def run(subfinder_class):
         '-x', '--exclude', nargs='+', help='exclude files and directorys, support glob mode like shell, e.g *, ?'
     )
     parser.add_argument('--api_urls', type=json.loads, help="specify the api urls with JSON")
+    parser.add_argument('--set_default',
+                        nargs='+',
+                        help="Set `default` and `language` flag to preferred subtitle, e.g: zh_chs")
     parser.add_argument(
         '--no-order-marker',
         action='store_true',

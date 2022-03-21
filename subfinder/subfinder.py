@@ -52,6 +52,8 @@ class SubFinder(object):
         self.exclude = kwargs.get('exclude', [])
         # api urls
         self.api_urls = kwargs.get('api_urls', {})
+        # set default
+        self.set_default = kwargs.get('set_default')
         # no-order-marker
         self.no_order_marker = kwargs.get('no_order_marker', False)
 

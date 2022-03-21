@@ -140,7 +140,7 @@ class BaseSubSearcher(object):
         return lang_prio * 10 + ext_prio
 
     @classmethod
-    def _gen_subname(cls, origin_file, videofile, language=None, ext=None, prio=''):
+    def _gen_subname(cls, origin_file, videofile, language=None, ext=None, prio='', default=''):
         if not language:
             language_ = []
             try:
@@ -165,7 +165,7 @@ class BaseSubSearcher(object):
         if prio and not prio.startswith('.'):
             prio = '.' + prio
 
-        return '{basename}{prio}{language}{ext}'.format(basename=basename, language=language, ext=ext, prio=prio)
+        return '{basename}{prio}{language}{default}{ext}'.format(basename=basename, language=language, ext=ext, prio=prio, default=default)
 
     @classmethod
     def _parse_videoname(cls, videoname):
@@ -310,7 +310,12 @@ class HTMLSubSearcher(BaseSubSearcher):
             if not self.subfinder.no_order_marker:
                 prio = self._calc_subtitle_file_prio(origin_file)
                 prio = '{:05d}'.format(prio)
-            subname = self._gen_subname(origin_file, self.videofile, prio=prio)
+            default = ''
+            language = None
+            if self.subfinder.set_default:
+                default='.default'
+                language = self.subfinder.set_default[0]
+            subname = self._gen_subname(origin_file, self.videofile, prio=prio, language=language, default=default)
             subpath = os.path.join(root, subname)
             cf.extract(name, subpath)
             subs.append(subpath)
